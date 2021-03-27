@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 
 app.get('/',(req,res)=>{
-    res.send("API Running");
+    res.send("API Running successfully");
 });
 
 const PORT = process.env.PORT || 5000;
