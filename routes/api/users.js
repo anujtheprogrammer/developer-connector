@@ -5,7 +5,6 @@ const bcrypt = require('bcryptjs');
 const {check,validationResult} = require('express-validator');
 const User = require('../../models/Users');
 
-const user = require('../../models/Users');
 
 // @router   POST api/users
 // @desc     register user
@@ -33,18 +32,18 @@ router.post('/', [
         }
 
         // use avatar using gravatar
-        const avatar = gravatar.url( email ,{
+        const avatar = gravatar.url(email ,{
             s:'200',
             r:'pg',
             d:'mm'
-        })
+        });
         
         user = new User({
             name,
             email,
             avatar,
             password
-        })
+        });
 
         // encrypt password
         const salt = await bcrypt.genSalt(10);
@@ -56,12 +55,12 @@ router.post('/', [
         // return jsonwebtokens
 
         res.send('user registered');
+        console.log('registeres');
     } catch (err){
         console.error(err.message);
         res.status(500).send('server error');
     }
 
-    
 });
 
 module.exports = router;
