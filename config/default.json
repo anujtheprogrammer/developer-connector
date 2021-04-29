@@ -2,5 +2,5 @@
     "mongoURI" : "mongodb+srv://anujbhatt123:anujbhatt123@devconnector.6zatb.mongodb.net/test?retryWrites=true&w=majority",
     "secretkey" : "mysecrettoken",
     "githubClientId" : "97c0e8bb7ec03b3a6e8f",
-    "githubSecret" : "17cfaa2782c56398bca70f57fc5ce18b15a9aa33"
+    "githubSecret" : "6488ddb7f6cdb45968964e266a1a856214ebf5b8"
 }
