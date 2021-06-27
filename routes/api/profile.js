@@ -36,7 +36,7 @@ router.post('/', [auth, [
     if(!errors.isEmpty()){
         return res.status(400).json({ errors : errors.array() });
     }
-
+   
     const {
         company,
         website,
@@ -51,7 +51,7 @@ router.post('/', [auth, [
         instagram,
         linkedin
     } = req.body;
-
+    
     // build profile object
     const profileFeilds = {};
     profileFeilds.user = req.user.id;
@@ -62,9 +62,9 @@ router.post('/', [auth, [
     if(status) profileFeilds.status = status;
     if(githubusername) profileFeilds.githubusername = githubusername;
     if(skills){
-        profileFeilds.skills = skills.split(',').map(skills => skills.trim());
+        profileFeilds.skills = skills.split(',').map(skill => skill.trim());
     } 
-
+    //console.log(profileFeilds.skills);
     // build social object
     profileFeilds.social = {}
     if(youtube) profileFeilds.social.youtube = youtube;
@@ -72,17 +72,18 @@ router.post('/', [auth, [
     if(twitter) profileFeilds.social.twitter = twitter;
     if(instagram) profileFeilds.social.instagram = instagram;
     if(linkedin) profileFeilds.social.linkedin = linkedin;
-
+    
     try{
         let profile = await Profile.findOne({ user: req.user.id});
-
+        //console.log('hi1');
         if(profile){
             // update this profile if found
-            Profile = await Profile.findByIdAndUpdate({ user: req.user.id}, {$set: profileFeilds}, {new:true});
-
+           
+            profile = await Profile.findOneAndUpdate({ user: req.user.id}, {$set: profileFeilds}, {new:true});
+            //console.log('hi');
             return res.json(profile);
         }
-
+       
         // if profile not found create one
         profile = new Profile(profileFeilds);
 
@@ -91,11 +92,11 @@ router.post('/', [auth, [
 
     } catch (err){
         console.error(err.message);
+        
         res.status(500).send('server error');
     }
 
     console.log(profileFeilds.skills)
-    res.send('hello');
 });
 
 // @router   get api/profile
