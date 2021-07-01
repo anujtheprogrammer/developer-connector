@@ -38,11 +38,15 @@ export const getProfiles = () => async dispatch => {
             payload : res.data
         });
     } catch (err) {
-        console.log(err.response)
+        console.log('hiiiii');
+        console.log(err)
+        if(err.responses){
         dispatch({
             type : PROFILE_ERROR,
             payload : {msg : err.response.statusText, status : err.response.status}
         });
+        }
+        
     }
 }
 
@@ -239,7 +243,7 @@ export const deleteEducation = id => async dispatch => {
 export const deleteAccount = () => async dispatch => {
     if(window.confirm('Are you sure. This cannot be undone!')){
     try{
-        const res = await axios.delete(`api/profile`);
+        await axios.delete(`api/profile`);
 
         dispatch({
             type : CLEAR_PROFILE,
