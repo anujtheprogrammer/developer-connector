@@ -9,14 +9,14 @@ const PostItem = ({ addLike, removeLike, deletePost, auth, post : { _id, text, n
     return (
         <div class="post bg-white my-1 p-1">
             <div>
-              <a href="profile.html">
+              <Link to={`/profile/${user}`}>
                 <img
                   class="round-img"
                   src={avatar}
                   alt=""
                 />
                 <h4>{name}</h4>
-              </a>
+              </Link>
             </div>
 
             <div>
